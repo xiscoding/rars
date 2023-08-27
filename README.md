@@ -12,7 +12,10 @@
 	- java --jar 
 
 ### Step 2: Install RARS
+- Option 1: clone this repo it has the .jar file
 - RARS is a RISC-V assembler 
+- Its possible the .jar included in this repo is not up to date
+- Do the below to ensure the RARS version is the most recent
 - https://github.com/TheThirdOne/rars/releases 
 	- Scroll down to assets
 	- Download
