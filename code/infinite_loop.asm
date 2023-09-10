@@ -6,6 +6,6 @@ main: # label "main" = address for "j" to jump to
      add x28, x6, x7
      add x28, x28, x28
      add x28, x28, x7
-     addi x7, x7, -2
+     addi x7, x7, -1
      sub x7, x7, x6
      j main # jump back to main (infinite loop)
