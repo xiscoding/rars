@@ -64,22 +64,59 @@ x28 (t3): Temporaries
 	- "instruction does an atomic jump to a controlled location" [additional info]](https://www.cs.cornell.edu/courses/cs3410/2019sp/schedule/slides/14-ecf-pre.pdf)
 	- instruction to tell cpu to perform the task specified by the code stored in the register
 	- This program has 3 codes 
-- ecall codes:
+- **ecall codes**:
 [cs.sfu.ca](https://www.cs.sfu.ca/~ashriram/Courses/CS295/tutorials/venus/venus_ecalls.html#:~:text=The%20ecall%20instruction%20is%20a,ecalls%20for%20you%20to%20use.)
 	- [eecs.yorku.ca](https://www.eecs.yorku.ca/course_archive/2022-23/F/2021A/RVS/RVS-IOsyscalls008.pdf)
-		- Print:
-			- **print_integer (ecall rd, rs, 0)**
-			- print_float (ecall rd, rs, 1)
-			- print_hexadecimal (ecall rd, rs, 2)
-			- print_characters (ecall rd, rs, 3)
-			- **print_string (ecall rd, rs, 4)**
-		- Input (Read):
-			- **read_integer (ecall rd, rs, 5)**
-			- read _float (ecall rd, rs, 6)
-			- read _hexadecimal (ecall rd, rs, 7)
-			- read _characters (ecall rd, rs, 8)
-			- read _string (ecall rd, rs, 9)
+	- better [jupitersim.gitbook.io](https://jupitersim.gitbook.io/jupiter/assembler/ecalls)
+		- **Print**:
+			- print_integer (ecall code: 1)
+				```
+				li a0, 1 # ecall code
+				li a1, 0xa # integer to print
+				ecall
+				```
+			- print_float (ecall code: 2)
+				```
+				li a0, 2 # ecall code
+				la t0, FLOAT_DATA
+				flw fa0, 0(t0) # float to print
+				ecall
+				```
+			- print_string (ecall code: 4)
+				```
+				li a0, 5 # ecall code
+				ecall
+				```
+			- print_char (ecall code: 11)
+				```
+				li a0, 11 # ecall code
+				li a1, 'a' # character to print
+				ecall
+				```
+		- **Input (Read)**:
+			- read_integer (ecall code: 5)
+				```
+				li a0, 5 # ecall code
+				ecall
+				```
+			- read _float (ecall code: 6)
+				```
+				li a0, 6
+				ecall
+				```
+			- read _string (ecall code: 8)
+		 		- read up to (length - 1) characters into a buffer whose address is in a1 and terminates the string with a null byte. 
+		 		- Buffer size has to be at least length bytes.
+				```
+				li a0, 8 # ecall code
+				la a1, string # buffer address
+				li a2, 256 # string length
+				```
+			- read_char (ecall code: 12)
+				```
+				li a0, 12 # ecall code
+				ecall
+				```
 #### bne:
 - branch not equal: [BNE](https://jemu.oscc.cc/BNE) branch if `register**rs1**` is not equal to `register**rs2**`,
-- 
-	
+

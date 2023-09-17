@@ -10,7 +10,7 @@ This repo is best paired with my youtube series: https://www.youtube.com/playlis
 	- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-do-I-install-Java-on-Ubuntu#:~:text=While%20Ubuntu%20does%20not%20come,Java%20with%20the%20apt%20command.
 	- sudo apt install default-jdk
 - check install 
-	- java --jar 
+	- java -jar 
 
 ### Step 2: Install RARS
 - Option 1: clone this repo it has the .jar file
