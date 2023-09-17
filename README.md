@@ -1,4 +1,5 @@
 # rars
+This repo is best paired with my youtube series: https://www.youtube.com/playlist?list=PLnroIuFBAs4_9UHOOjgop_4Ac4wloOjcz
 
 ## Installation
 
@@ -20,3 +21,16 @@
 	- Scroll down to assets
 	- Download
 - Run the `.jar` file using Java - `java -jar <path_to_rars.jar>`
+
+## Sections 
+Subject to intese and vigerous reorginization
+- Reference: Lesson documents can be found in the reference sections
+	- Corresponding video lessons can be found on youtube with the same name
+	- Videos and documents should come out weekly on Sunday
+	- Any other useful documents I will upload here as well
+		- My video lessons will usually have additional documents and websites 
+		- Check out my videos for the most information
+		- will generally only upload .md and .pdf files in this section
+- Code:
+	- Code used for a video lesson
+	- will be reorginized in the future
