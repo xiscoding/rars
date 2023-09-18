@@ -68,6 +68,7 @@ x28 (t3): Temporaries
 [cs.sfu.ca](https://www.cs.sfu.ca/~ashriram/Courses/CS295/tutorials/venus/venus_ecalls.html#:~:text=The%20ecall%20instruction%20is%20a,ecalls%20for%20you%20to%20use.)
 	- [eecs.yorku.ca](https://www.eecs.yorku.ca/course_archive/2022-23/F/2021A/RVS/RVS-IOsyscalls008.pdf)
 	- better [jupitersim.gitbook.io](https://jupitersim.gitbook.io/jupiter/assembler/ecalls)
+SUPPORTED RARS ENVIRONMENT CALLS [TheThirdOne github-wiki](https://github-wiki-see.page/m/TheThirdOne/rars/wiki/Environment-Calls)
 		- **Print**:
 			- print_integer (ecall code: 1)
 				```
