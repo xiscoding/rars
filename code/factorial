@@ -1,0 +1,23 @@
+fact : addi t0, zero, 2          # immediate 2 needed for "if(n<2)" 
+       bge    a0 , t0, elseF     # if n<2 false, ie if n≥2 goto ELSE 
+       addi a0, zero, 1          # THEN: create return-value 1, place in reg. a0 
+       jr ra                     # return --this is the end of the "then" clause 
+
+elseF: addi sp, sp, -16          # PUSH1: allocate 16 Bytes on the stack 
+       sd ra, 8(sp)              # PUSH2: save ra into first allocated word 
+       sd     a0 , 0(sp)         # PUSH3: save my argument (n) into second word 
+       addi a0, a0 , -1          # create argument (n-1) into a0 for my child 
+
+       jal ra, fact              # call my child procedure
+
+       add t0, a0, zero          # copy return value from my child into t0 
+                                 # (because I need to restore my own argument into a0) 
+
+       ld ra, 8(sp)              # POP1: restore ra from stack 
+       ld     a0 , 0(sp)         # POP2: restore a0 from stack 
+       addi sp, sp, 16           # POP3: dealloc the 16 B that I had allocated 
+       mul a0, a0 , t0           # multiply my own arg a0==n times the return 
+                                 # value from my child that I had copied into t0, and 
+                                 # place the result into a0, as my own return value 
+
+       jr ra          

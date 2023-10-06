@@ -1,7 +1,7 @@
 .data
 	# Info messages
 	end_message: .asciz "Your function was called successfully. Check the registers specified in the post-condition to verify correctness of your function."
-	continue_message:  .asciz "\nPress any key to continue"
+
 	# Test menu
 	test_question:  .asciz "\nWhich program do you want to run? [0-1]\n"
 	test_0: 	.asciz     "  0.  Linked list (Part 1)\n"
@@ -23,7 +23,7 @@
 	function_2: 	.asciz     "  2.  Get the element at index (LL_INDEX)\n"
 	function_3: 	.asciz     "  3.  Get all elements greater or equal (LL_GREATER_OR_EQUAL)\n"
 	function_4: 	.asciz     "  4.  Reverse linked list (LL_REVERSE)\n\n"
-	exit_funct:	.asciz	   "  -1. Exit Program(QUIT)\n\n"
+
 	invalid_input:  .asciz     "Invalid selection, try again."
 
 	# Function prompts
@@ -163,18 +163,15 @@ FUNCTION_SELECTION:
 	ecall
 	la a0, function_4
 	ecall
-	la a0, exit_funct
-	ecall
 	la a0, prompt_char
 	ecall
-	
+
 	# Read user selection
 	li a7, 5
 	ecall
 
 	# Validate that it's between 0-4 inclusive
-	#blt a0, zero, INVALID_FUNCTION	
-	blt a0, zero, EXIT
+	blt a0, zero, INVALID_FUNCTION
 	li t0, 4
 	bgt a0, t0, INVALID_FUNCTION
 	j VALID_FUNCTION
@@ -196,13 +193,12 @@ VALID_FUNCTION:
 	beq a0, t0, GREATER_OR_EQUAL_LIST
 	li t0, 4
 	beq a0, t0, REVERSE_LIST
-	
 
 
 COUNT_LIST:
 	add a0, s1, zero
 	jal ra, LL_COUNT
-	j END
+	j EXIT
 
 
 SEARCH_LIST:
@@ -217,7 +213,7 @@ SEARCH_LIST:
 	add a0, s1, zero
 	jal ra, LL_SEARCH
 
-	j END
+	j EXIT
 
 
 INDEX_LIST:
@@ -232,7 +228,7 @@ INDEX_LIST:
 	add a0, s1, zero
 	jal ra, LL_INDEX
 
-	j END
+	j EXIT
 
 
 GREATER_OR_EQUAL_LIST:
@@ -247,33 +243,25 @@ GREATER_OR_EQUAL_LIST:
 	add a0, s1, zero
 	jal ra, LL_GREATER_OR_EQUAL
 
-	j END
+	j EXIT
 
 REVERSE_LIST:
 	add a0, s1, zero
 	add a1, s2, zero
 	jal ra, LL_REVERSE
 	add s1, a0, zero
-	j END
 
-END:
+	j EXIT
+
+EXIT:
 	# Save a0 to avoid clobbering the return value of the functions called
 	add t0, a0, zero
-	# Restore a0
-	add a0, t0, zero
 	# Display end message to user
 	la a0, end_message
 	li a7, 4
 	ecall
-	la a0, continue_message
-	li a7, 4
-	ecall
-	# Read integer from user
-	li a7, 12
-	ecall
-	j EXIT
-	
-EXIT:
+	# Restore a0
+	add a0, t0, zero
 	# Quit
 	li a7, 10
 	ecall

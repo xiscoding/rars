@@ -18,6 +18,14 @@
 # -----------------------------------------------------------------------------
 PROC_GREATER_DIGIT_SUM:
 	# -- START EDITING HERE --
+	#callee - saved s0,s1
+	#PROC_ADD_DIGITS - caller saved t0
+	addi sp,sp, -16 #allocate mem for two ints (8 bytes above the stack)
+	sw s0, 8(sp) #save s0
+	sw s1, 4(sp) #save s1
+	sw ra, 0(sp)
+	
+	
 	# -- END EDITING HERE --
 
 	addi 	s0, a0, 0 		# Save the first integer
@@ -29,6 +37,8 @@ PROC_GREATER_DIGIT_SUM:
 	addi 	t0, a0, 0
 
 	# -- START EDITING HERE --
+	#allocate mem for one int (4 bytes above stack)
+	sw t0, 12(sp) #save t0 
 	# -- END EDITING HERE --
 
 	# Sum digits of second integer and save to t1
@@ -37,6 +47,8 @@ PROC_GREATER_DIGIT_SUM:
 	addi 	t1, a0, 0
 
 	# -- START EDITING HERE --
+	lw t0, 12(sp)
+	 #allocate mem for one int (4 bytes above stack)
 	# -- END EDITING HERE --
 
 	# Assume the first integer has the greater digit sum
@@ -57,6 +69,11 @@ PROC_GREATER_DIGIT_SUM:
 	PROC_GDS_EXIT:
 
 	# -- START EDITING HERE --
+	# 16 bytes allocated t1, t0, s0, s1	
+	lw ra, 0(sp)
+	lw s1, 4(sp)
+	lw s0, 8(sp)
+	addi sp, sp, 16
 	# -- END EDITING HERE --
 
 	jr 	ra, 0
@@ -75,7 +92,7 @@ PROC_ADD_DIGITS:
 	li 	t2, 0 		# Temporary to store rem result
 
 	PROC_AD_LOOP:
-		rem 	t2, a0, t1
+		rem 	t2, a0, t1 
 		add 	t0, t0, t2
 		ble 	a0, t1, PROC_AD_EXIT
 		div 	a0, a0, t1
@@ -83,4 +100,4 @@ PROC_ADD_DIGITS:
 
 	PROC_AD_EXIT:
 		addi 	a0, t0, 0
-		jr 	ra, 0
+		jr 	ra, 0  #JUMPS TO START OF STACK.ASM
