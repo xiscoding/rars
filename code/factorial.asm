@@ -3,6 +3,7 @@
 	enter_number_prompt: .asciz "Enter the first positive integer: "
 	final_value_prompt: .asciz "The factorial of the number you enter is: "
 .text
+
 la a0, enter_number_prompt
 addi a7, zero, 5
 ecall
